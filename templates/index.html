@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Plot</title>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        // Function to handle form submission via AJAX on button click
+        function submitForm() {
+            var query = $('#query').val();  // Get the input value
+
+            // Perform AJAX POST request
+            $.post('/plot', { query: query }, function(response) {
+                // Update the plot container with the new plot
+                $('#plot-container').html(response);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Welcome!</h1>
+
+    <!-- Form with input and submit button -->
+    <form onsubmit="submitForm(); return false;">
+        <label for="query">Enter your question:</label>
+        <input type="text" id="query" name="query" required>
+        <button type="submit">Generate Plot</button>
+    </form>
+
+    <!-- Container to hold the generated plot -->
+    <div id="plot-container"></div>
+</body>
+</html>
